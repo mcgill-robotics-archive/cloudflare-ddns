@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+on_err() {
+  log "Error on line ${1}"
+}
+
+trap 'on_err ${LINENO}' ERR
 
 file_path=$(dirname "$(readlink -f "$0")")
 source ${file_path}/config.sh
