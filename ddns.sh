@@ -14,7 +14,7 @@ source ${file_path}/config.sh
 log() {
   if [ "${1}" ]; then
     echo -e "${1}"
-    echo -e "[$(date)] - ${1}" >> ${file_path}/${log_name}
+    echo -e "[$(date)] - ${1}" >> ${file_path}/logs/$(date '+%y%m%d')_${log_name}
   fi
 }
 
@@ -47,7 +47,7 @@ fi
 update=$(curl -s -X PUT "${api_url}/${zone_id}/dns_records/${record_id}" \
   -H "X-Auth-Email: ${auth_email}" \
   -H "X-Auth-Key: ${auth_key}" -H "Content-Type: application/json" \
-  --data "{\"id\":\"${zone_id}\",\"type\":\"A\",\"name\":\"${record_name}\",\"content\":\"${ip}\",\"proxied\":true}")
+  --data "{\"id\":\"${zone_id}\",\"type\":\"A\",\"name\":\"${record_name}\",\"content\":\"${ip}\",\"proxied\":false}")
 
 if [[ ${update} == *"\"success\":false"* ]]; then
   msg="API UPDATE FAILED:\n${update}"
