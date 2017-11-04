@@ -13,6 +13,9 @@ source ${file_path}/config.sh
 # LOGGER
 log() {
   if [ "${1}" ]; then
+    if [[ ! -d ${file_path}/logs ]]; then
+      mkdir ${file_path}/logs
+    fi
     echo -e "${1}"
     echo -e "[$(date)] - ${1}" >> ${file_path}/logs/$(date '+%y%m%d')_${log_name}
   fi
