@@ -47,7 +47,7 @@ fi
 update=$(curl -s -X PUT "${api_url}/${zone_id}/dns_records/${record_id}" \
   -H "X-Auth-Email: ${auth_email}" \
   -H "X-Auth-Key: ${auth_key}" -H "Content-Type: application/json" \
-  --data "{\"id\":\"${zone_id}\",\"type\":\"A\",\"name\":\"${record_name}\",\"content\":\"${ip}\",\"proxied\":false}")
+  --data "{\"id\":\"${zone_id}\",\"type\":\"A\",\"name\":\"${record_name}\",\"content\":\"${ip}\",\"proxied\":${dns_proxied}}")
 
 if [[ ${update} == *"\"success\":false"* ]]; then
   msg="API UPDATE FAILED:\n${update}"
